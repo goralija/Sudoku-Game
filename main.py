@@ -3,13 +3,15 @@ import sys
 from boards import boards
 import random
 from draw_the_board import *
+from sudoku_solver import *
+from messages import *
 
 pygame.init()
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Sudoku")
+font = pygame.font.Font(None, 36)
 
 def main():
-    # Choose a random element
     board = random.choice(boards)
     
     selected = None
@@ -17,6 +19,12 @@ def main():
     while running:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
+                print("Checking if the board is solvable...")
+                if solve_sudoku(board):
+                    print("Board is solvable:")
+                    print_board(board)
+                else:
+                    print("Board is not solvable.")
                 running = False
                 pygame.quit()
                 sys.exit()
@@ -24,10 +32,12 @@ def main():
                 pos = pygame.mouse.get_pos()
                 selected = get_clicked_pos(pos)
             if event.type == pygame.KEYDOWN:
-                #we need to check if that number can go there
+                # Check if the key is a digit and if the selected cell is valid
                 if selected and event.unicode.isdigit():
                     row, col = selected
-                    board[row][col] = int(event.unicode)
+                    num = int(event.unicode)
+                    if is_valid(board, row, col, num): board[row][col] = num
+                    else: draw_popup_message(f"Cannot place {num} at ({row}, {col}). Invalid move.")
 
         draw_grid()
         if selected:
