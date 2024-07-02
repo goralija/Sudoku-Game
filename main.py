@@ -6,19 +6,20 @@ from sudoku_solver import *
 from menu import *
 
 def main():
+    
     difficulty = menu()  # Get the selected difficulty from the menu
     board = fetch_new_board(difficulty)  # Fetch the board based on selected difficulty
+    validity_board = make_validity_board(board)
     
     selected = None
     running = True
     while running:
-        selected = handle_events(board, selected)
+        selected = handle_events(board, validity_board, selected, screen)
         draw_grid()
         if selected:
             row, col = selected
             handle_selected(board, row, col)
         draw_numbers(board)
-        
         pygame.display.flip()
 
 if __name__ == "__main__":

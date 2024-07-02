@@ -46,3 +46,12 @@ def print_board(board):
     for row in board:
         print(" ".join(str(num) if num != 0 else '.' for num in row))
     print()
+    
+def make_validity_board(board):
+    validity_board = []
+    for row in board:
+        valid_row = []
+        for num in row:
+            valid_row.append(num != 0)
+        validity_board.append(valid_row)
+    return validity_board

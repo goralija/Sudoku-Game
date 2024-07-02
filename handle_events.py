@@ -1,10 +1,15 @@
-from main import *
+import pygame
+import sys
+import copy
+import time
 from draw_the_board import *
 from sudoku_solver import *
-import sys
 from messages import *
 
-def handle_events(board, selected):
+def handle_events(board, validity_board, selected, screen):
+    popup_end_time = None
+    popup_message = None
+
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             print("Checking if the board is solvable...")
@@ -24,12 +29,19 @@ def handle_events(board, selected):
             if selected:
                 row, col = selected
                 
-                if event.unicode.isdigit():
+                if event.unicode.isdigit() and validity_board[row][col] != 1:
                     num = int(event.unicode)
                     if is_valid(board, row, col, num):
-                        board[row][col] = num
+                        board_copy = copy.deepcopy(board)
+                        board_copy[row][col] = num
+                        if solve_sudoku(board_copy):
+                            board[row][col] = num
+                        else:
+                            popup_message = f"Cannot place {num} at ({row}, {col}). Invalid move."
+                            popup_end_time = time.time() + 2
                     else:
-                        draw_popup_message(f"Cannot place {num} at ({row}, {col}). Invalid move.")
+                        popup_message = f"Cannot place {num} at ({row}, {col}). Invalid move."
+                        popup_end_time = time.time() + 2
                 
                 if event.key == pygame.K_LEFT and col > 0:
                     col -= 1
@@ -39,7 +51,9 @@ def handle_events(board, selected):
                     row -= 1
                 elif event.key == pygame.K_DOWN and row < 8:
                     row += 1
-                
                 selected = (row, col)
+
+    if popup_message and time.time() < popup_end_time:
+        draw_popup_message(screen, popup_message)
     
     return selected
