@@ -6,7 +6,7 @@ from draw_the_board import *
 from sudoku_solver import *
 from messages import *
 
-def handle_events(board, validity_board, selected, screen):
+def handle_events(board, validity_board, selected, screen, running):
     popup_end_time = None
     popup_message = None
 
@@ -36,6 +36,10 @@ def handle_events(board, validity_board, selected, screen):
                         board_copy[row][col] = num
                         if solve_sudoku(board_copy):
                             board[row][col] = num
+                            if is_board_solved(board):
+                                running = False
+                                popup_message = "Congratulations! You solved the puzzle!"
+                                popup_end_time = time.time() + 2
                         else:
                             popup_message = f"Cannot place {num} at ({row}, {col}). Invalid move."
                             popup_end_time = time.time() + 2

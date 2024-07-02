@@ -12,6 +12,7 @@ def fetch_new_board(difficulty = "easy"):
             board_data = data['newboard']['grids'][0]  # Extract the first board from the response
 
             if board_data['difficulty'].lower() == difficulty.lower():
+                print("success fetching new board")
                 return board_data['value']
         except requests.RequestException as e:
             print(f"Error fetching new board: {e}")

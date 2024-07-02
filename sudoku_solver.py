@@ -55,3 +55,9 @@ def make_validity_board(board):
             valid_row.append(num != 0)
         validity_board.append(valid_row)
     return validity_board
+
+def is_board_solved(board):
+    for row in board:
+        if 0 in row:
+            return False
+    return solve_sudoku([row[:] for row in board])
