@@ -3,7 +3,7 @@ from draw_the_board import *
 import sys
 
 def draw_menu():
-    screen.fill((255, 255, 255))
+    screen.fill((255, 238, 219))
     title_font = pygame.font.Font(None, 74)
     button_font = pygame.font.Font(None, 50)
     

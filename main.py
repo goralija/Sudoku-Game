@@ -1,10 +1,8 @@
 import pygame
-import sys
 from boards import *
-import random
 from draw_the_board import *
+from handle_events import *
 from sudoku_solver import *
-from messages import *
 from menu import *
 
 def main():
@@ -14,29 +12,7 @@ def main():
     selected = None
     running = True
     while running:
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                print("Checking if the board is solvable...")
-                if solve_sudoku(board):
-                    print("Board is solvable:")
-                    print_board(board)
-                else:
-                    print("Board is not solvable.")
-                running = False
-                pygame.quit()
-                sys.exit()
-            if event.type == pygame.MOUSEBUTTONDOWN:
-                pos = pygame.mouse.get_pos()
-                selected = get_clicked_pos(pos)
-            if event.type == pygame.KEYDOWN:
-                if selected and event.unicode.isdigit():
-                    row, col = selected
-                    num = int(event.unicode)
-                    if is_valid(board, row, col, num):
-                        board[row][col] = num
-                    else:
-                        draw_popup_message(f"Cannot place {num} at ({row}, {col}). Invalid move.")
-        
+        selected = handle_events(board, selected)
         draw_grid()
         if selected:
             row, col = selected
