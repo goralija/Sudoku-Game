@@ -1,21 +1,21 @@
 import requests
 import random
 
-#https://sudoku-api.vercel.app/api/dosuku?query={newboard(limit:1){grids{difficulty}}}
-#https://sudoku-api.vercel.app/api/dosuku?query={newboard(limit:1){grids{value}}}
-
-def fetch_new_board():
+def fetch_new_board(difficulty = "easy"):
     url = "https://sudoku-api.vercel.app/api/dosuku"
-    try:
-        response = requests.get(url)
-        response.raise_for_status()  # Check if the request was successful
-        data = response.json()
-        board = data['newboard']['grids'][0]['value']  # Extract the board from the JSON response
-        print('success')
-        return board
-    except requests.RequestException as e:
-        print(f"Error fetching new board: {e}")
-        return random.choice(boards)
+    
+    while True:
+        try:
+            response = requests.get(url)
+            response.raise_for_status()  # Check if the request was successful
+            data = response.json()
+            board_data = data['newboard']['grids'][0]  # Extract the first board from the response
+
+            if board_data['difficulty'].lower() == difficulty.lower():
+                return board_data['value']
+        except requests.RequestException as e:
+            print(f"Error fetching new board: {e}")
+            return random.choice(boards)
 
 
 
