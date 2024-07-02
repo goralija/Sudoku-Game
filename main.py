@@ -1,6 +1,6 @@
 import pygame
 import sys
-from boards import boards
+from boards import *
 import random
 from draw_the_board import *
 from sudoku_solver import *
@@ -11,9 +11,8 @@ screen = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Sudoku")
 font = pygame.font.Font(None, 36)
 
-def main():
-    board = random.choice(boards)
-    
+def main(): 
+    board = fetch_new_board()   
     selected = None
     running = True
     while running:
