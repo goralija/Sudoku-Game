@@ -34,6 +34,5 @@ def main():
             update_user_stats(user[1], False)  # Update losses
             draw_popup_message("Game over. Better luck next time!")
 
-
 if __name__ == "__main__":
     main()

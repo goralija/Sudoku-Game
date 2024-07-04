@@ -28,3 +28,4 @@ def draw_popup_message(screen, message, duration=2):
         pygame.display.flip()
 
     pygame.time.wait(int(duration * 1000))
+
