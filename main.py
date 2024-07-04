@@ -6,6 +6,8 @@ from sudoku_solver import *
 from menu import *
 from database import *
 from login import *
+from visual_components import *
+from messages import *
 
 def main():
     setup_database()

@@ -41,6 +41,7 @@ class InputBox:
         return None
 
     def draw(self, screen):
+        screen.fill(WHITE, self.rect)
         # Blit the text.
         screen.blit(self.txt_surface, (self.rect.x+5, self.rect.y+5))
         # Blit the rect.

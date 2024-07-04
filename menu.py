@@ -1,6 +1,7 @@
 from main import *
 from draw_the_board import *
 import sys
+from visual_components import *
 
 def draw_menu():
     screen.fill((255, 238, 219))

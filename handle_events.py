@@ -2,9 +2,9 @@ import pygame
 import sys
 import copy
 import time
-from draw_the_board import *
-from sudoku_solver import *
 from messages import *
+from sudoku_solver import *
+from visual_components import *
 
 def handle_events(board, validity_board, selected, screen):
     popup_end_time = None

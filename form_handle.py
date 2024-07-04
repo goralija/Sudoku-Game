@@ -2,6 +2,11 @@ from input_field import *
 from draw_the_board import *
 from messages import *
 from database import *
+import time
+from visual_components import *
+
+popup_message = None
+popup_end_time = None
 
 def display_form(screen, title, inputs, button_text):
     screen.fill(WHITE)
@@ -42,6 +47,9 @@ def handle_form(screen, title, inputs, button_text, submit_action):
 
             for input_box in input_boxes:
                 input_box.handle_event(event)
+                
+        if popup_message and time.time() < popup_end_time:
+            draw_popup_message(popup_message, popup_end_time)
 
         for input_box in input_boxes:
             input_box.draw(screen)
@@ -57,7 +65,8 @@ def login_action(username, password):
         print(f"Welcome back, {username}!")
         return True
     else:
-        draw_popup_message(screen, "Invalid username or password.")
+        popup_message = "Username or password is incorrect"
+        popup_end_time = time.time() + 2
         return False
 
 def register_action(username, password):
@@ -65,5 +74,6 @@ def register_action(username, password):
         print(f"Registration successful. Welcome, {username}!")
         return True
     else:
-        draw_popup_message(screen, "Username already exists.")
+        popup_message = "User already registered"
+        popup_end_time = time.time() + 2
         return False

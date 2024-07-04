@@ -2,11 +2,11 @@ from main import *
 from handle_events import *
 from menu import *
 from draw_the_board import *
-from messages import *
 import pygame
 import sys
 from database import *
 from form_handle import *
+from visual_components import *
 
 def draw_text(screen, text, size, x, y):
     font = pygame.font.Font(None, size)
