@@ -1,20 +1,23 @@
 def is_valid(board, row, col, num):
     # Check if the number is not repeated in the row
     for i in range(9):
-        if board[row][i] == num:
-            return False
+        if i != col:
+            if board[row][i] == num:
+                return False
 
     # Check if the number is not repeated in the column
     for i in range(9):
-        if board[i][col] == num:
-            return False
+        if i != row:
+            if board[i][col] == num:
+                return False
 
     # Check if the number is not repeated in the 3x3 subgrid
     start_row, start_col = 3 * (row // 3), 3 * (col // 3)
     for i in range(start_row, start_row + 3):
         for j in range(start_col, start_col + 3):
-            if board[i][j] == num:
-                return False
+            if i != row or j != col:
+                if board[i][j] == num:
+                    return False
             
     return True
 
