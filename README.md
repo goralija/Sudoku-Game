@@ -79,10 +79,6 @@ To get started with the Sudoku Game, follow these steps:
 - **SQLite:** A lightweight database to manage user data.
 - **PyInstaller:** To create standalone executables for distribution.
 
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
 ---
 
 ### Technical Overview
