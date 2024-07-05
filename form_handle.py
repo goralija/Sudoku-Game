@@ -63,17 +63,17 @@ def login_action(username, password):
     user = login_user(username, password)
     if user:
         print(f"Welcome back, {username}!")
-        return True
+        return user
     else:
         popup_message = "Username or password is incorrect"
         popup_end_time = time.time() + 2
-        return False
+        return None
 
 def register_action(username, password):
     if register_user(username, password):
         print(f"Registration successful. Welcome, {username}!")
-        return True
+        return login_action(username, password)
     else:
         popup_message = "User already registered"
         popup_end_time = time.time() + 2
-        return False
+        return None

@@ -14,7 +14,8 @@ def main():
     user = display_login_menu()
     while True:
         selected_difficulty = menu()
-        board = fetch_new_board(selected_difficulty)
+        board = fetch_new_board1()
+        #board = fetch_new_board(selected_difficulty)
         validity_board = make_validity_board(board)
         selected = None
         running = True
@@ -28,13 +29,16 @@ def main():
             draw_numbers(board)
             
             pygame.display.flip()
+            
+            if is_board_solved(board):
+                running = False
         
         if is_board_solved(board):
             update_user_stats(user[1], True)  # Update wins
-            draw_popup_message("Congratulations! You solved the puzzle!")
+            draw_popup_message(screen, "Congratulations! You solved the puzzle!")
         else:
             update_user_stats(user[1], False)  # Update losses
-            draw_popup_message("Game over. Better luck next time!")
+            draw_popup_message(screen, "Game over. Better luck next time!")
 
 if __name__ == "__main__":
     main()
