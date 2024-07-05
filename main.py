@@ -14,13 +14,12 @@ def main():
     user = display_login_menu()
     while True:
         selected_difficulty = menu(user)
-        board = fetch_new_board1()
-        #board = fetch_new_board(selected_difficulty)
+        board = fetch_new_board(selected_difficulty)
         validity_board = make_validity_board(board)
         selected = None
         running = True
         while running:
-            selected = handle_events(board, validity_board, selected, screen)
+            selected = handle_events(board, validity_board, selected, screen, user)
             
             draw_grid()
             if selected:
@@ -39,6 +38,7 @@ def main():
         else:
             update_user_stats(user[1], False)  # Update losses
             draw_popup_message(screen, "Game over. Better luck next time!")
+
 
 if __name__ == "__main__":
     main()

@@ -1,9 +1,6 @@
 import requests
 import random
 
-def fetch_new_board1():
-    return boards[0]
-
 def fetch_new_board(difficulty = "easy"):
     url = "https://sudoku-api.vercel.app/api/dosuku"
     

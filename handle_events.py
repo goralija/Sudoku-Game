@@ -5,6 +5,7 @@ import time
 from messages import *
 from sudoku_solver import *
 from visual_components import *
+from database import update_user_stats
 
 def get_clicked_pos(pos):
     x, y = pos
@@ -12,7 +13,7 @@ def get_clicked_pos(pos):
     col = x // SQUARE_SIZE
     return row, col
 
-def handle_events(board, validity_board, selected, screen):
+def handle_events(board, validity_board, selected, screen, user):
     popup_end_time = None
     popup_message = None
 
@@ -22,6 +23,7 @@ def handle_events(board, validity_board, selected, screen):
             if solve_sudoku(board):
                 print("Board is solvable:")
                 print_board(board)
+                update_user_stats(user[1], False)
             else:
                 print("Board is not solvable.")
             pygame.quit()
