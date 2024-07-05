@@ -13,7 +13,7 @@ def main():
     setup_database()
     user = display_login_menu()
     while True:
-        selected_difficulty = menu()
+        selected_difficulty = menu(user)
         board = fetch_new_board1()
         #board = fetch_new_board(selected_difficulty)
         validity_board = make_validity_board(board)

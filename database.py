@@ -42,3 +42,11 @@ def update_user_stats(username, won):
         c.execute('UPDATE users SET losses = losses + 1 WHERE username = ?', (username,))
     conn.commit()
     conn.close()
+
+def fetch_user_stats(username):
+    conn = sqlite3.connect('sudoku_game.db')
+    c = conn.cursor()
+    c.execute('SELECT wins, losses FROM users WHERE username = ?', (username,))
+    stats = c.fetchone()
+    conn.close()
+    return stats
