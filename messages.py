@@ -6,8 +6,9 @@ import sys
 from visual_components import *
 
 font = pygame.font.Font(None, 36)
-def draw_popup_message(message, duration=2):
+def draw_popup_message(screen, message, duration=2):
     screen = pygame.display.set_mode((WIDTH, HEIGHT))
+    message = str(message)
     popup_width = 700
     popup_height = 100
     popup_x = (WIDTH - popup_width) // 2

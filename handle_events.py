@@ -6,6 +6,12 @@ from messages import *
 from sudoku_solver import *
 from visual_components import *
 
+def get_clicked_pos(pos):
+    x, y = pos
+    row = y // SQUARE_SIZE
+    col = x // SQUARE_SIZE
+    return row, col
+
 def handle_events(board, validity_board, selected, screen):
     popup_end_time = None
     popup_message = None
